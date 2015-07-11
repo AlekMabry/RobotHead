@@ -1,4 +1,4 @@
-/* Based on http://opencv-srf.blogspot.com/2010/09/object-detection-using-color*/
+/* Based on http://opencv-srf.blogspot.com/2010/09/object-detection-using-color-seperation.html */
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
@@ -14,7 +14,7 @@ int halfWidth, halfHeight;
 IplImage* GetThresholdedImage(IplImage* imgHSV){
     static int gotHSV = 0;
     static int Hmin, Hmax, Smin, Smax, Vmin, Vmax;
-FILE *fp;
+    FILE *fp;
     if(!gotHSV || debug > 1) {
         gotHSV = 1;
         fp = fopen("hsv.txt","r");
@@ -24,13 +24,14 @@ FILE *fp;
         fscanf(fp, "%d", &Smax);
         fscanf(fp, "%d", &Vmin);
         fscanf(fp, "%d", &Vmax);
-        printf("hsv.txt: %d-%d, %d-%d, %d-%d\n", Hmin, Hmax, Smin, Smax, Vmin, $
+        printf("hsv.txt: %d-%d, %d-%d, %d-%d\n", Hmin, Hmax, Smin, Smax, Vmin, Vmax);
         fclose(fp);
     }
     IplImage* imgThresh=cvCreateImage(cvGetSize(imgHSV),IPL_DEPTH_8U, 1);
-    cvInRangeS(imgHSV, cvScalar(Hmin,Smin,Vmin), cvScalar(Hmax,Smax,Vmax), imgT$
+    cvInRangeS(imgHSV, cvScalar(Hmin,Smin,Vmin), cvScalar(Hmax,Smax,Vmax), imgThresh); 
     return imgThresh;
 }
+
 void trackObject(IplImage* imgThresh){
     // Calculate the moments of 'imgThresh'
     CvMoments *moments = (CvMoments*)malloc(sizeof(CvMoments));
@@ -38,15 +39,17 @@ void trackObject(IplImage* imgThresh){
     double moment10 = cvGetSpatialMoment(moments, 1, 0);
     double moment01 = cvGetSpatialMoment(moments, 0, 1);
     double area = cvGetCentralMoment(moments, 0, 0);
-    // if the area<100, I consider that the there are no object in the image an$
+
+    // if the area<100, I consider that the there are no object in the image and it's because of the noise, the area is not zero 
     if(area>100){
         // calculate the position of the ball
         int posX = moment10/area;
         int posY = moment01/area;        
- if(debug>1 && lastX>=0 && lastY>=0 && posX>=0 && posY>=0)
+        
+        if(debug>1 && lastX>=0 && lastY>=0 && posX>=0 && posY>=0)
         {
             // Draw a yellow line from the previous point to the current point
-            cvLine(imgTracking, cvPoint(posX, posY), cvPoint(lastX, lastY), cvS$
+            cvLine(imgTracking, cvPoint(posX, posY), cvPoint(lastX, lastY), cvScalar(0,0,255), 4);
         }
 
         lastX = posX;
@@ -59,6 +62,8 @@ void trackObject(IplImage* imgThresh){
 
     free(moments); 
 }
+
+
 int main(){
       CvCapture* capture =0;
       CvSize dim;
@@ -77,11 +82,12 @@ int main(){
          printf("Capture failure\n");
          return -1;
       }
-
+      
       IplImage* frame=0;
       frame = cvQueryFrame(capture);           
       if(!frame) return -1;
- //create a blank image and assigned to 'imgTracking' which has the same s$
+   
+      //create a blank image and assigned to 'imgTracking' which has the same size of original video
       dim = cvGetSize(frame);
       imgTracking=cvCreateImage(dim,IPL_DEPTH_8U, 3);
       cvZero(imgTracking); //covert the image, 'imgTracking' to black
@@ -95,20 +101,20 @@ int main(){
       }
 
       //iterate through each frames of the video     
-while(true){
+      while(true){
 
             frame = cvQueryFrame(capture);           
             if(!frame) break;
             frame=cvCloneImage(frame); 
+            
+            cvSmooth(frame, frame, CV_GAUSSIAN,3,3); //smooth the original image using Gaussian kernel
 
-            cvSmooth(frame, frame, CV_GAUSSIAN,3,3); //smooth the original imag$
-
-            IplImage* imgHSV = cvCreateImage(cvGetSize(frame), IPL_DEPTH_8U, 3)$
-            cvCvtColor(frame, imgHSV, CV_BGR2HSV); //Change the color format fr$
+            IplImage* imgHSV = cvCreateImage(cvGetSize(frame), IPL_DEPTH_8U, 3); 
+            cvCvtColor(frame, imgHSV, CV_BGR2HSV); //Change the color format from BGR to HSV
             IplImage* imgThresh = GetThresholdedImage(imgHSV);
-
- cvSmooth(imgThresh, imgThresh, CV_GAUSSIAN,3,3); //smooth the binar$
-
+          
+            cvSmooth(imgThresh, imgThresh, CV_GAUSSIAN,3,3); //smooth the binary image using Gaussian kernel
+            
             //track the possition of the ball
             trackObject(imgThresh);
 
@@ -121,7 +127,8 @@ while(true){
                cvShowImage("Ball", imgThresh);           
                cvShowImage("Video", frame);
             }
-//Clean up used images
+           
+            //Clean up used images
             cvReleaseImage(&imgHSV);
             cvReleaseImage(&imgThresh);            
             cvReleaseImage(&frame);
