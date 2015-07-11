@@ -1,4 +1,4 @@
-/* Based on http://opencv-srf.blogspot.com/2010/09/object-detection-using-color$
+/* Based on http://opencv-srf.blogspot.com/2010/09/object-detection-using-color*/
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
