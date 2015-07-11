@@ -62,5 +62,5 @@ function scheduleNextUpdate() {
                         yposition= (yposition-increment);
                 }
  })
-    setTimeout(updateDuty, 100);
+    setTimeout(updateDuty, 10);
 }
