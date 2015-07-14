@@ -43,7 +43,9 @@ function scheduleNextUpdate() {
         //create variable line that holds the values from the current incoming string
         rl.on('line', function(line){
         
-        //code used to convert the  "***** *****" to "00000 00000" was removed because I changed the output of the tracker.cpp file.
+        //The tracker program used to output *'s to show that the ball was not detected. Originally I had code here to convert
+        //the *'s into 0's, but I recently changed the tracker.cpp to output 0's when the ball is not detected, so the code
+        //is no longer needed.
         
             
         //split the incoming string into it's x and y values.
