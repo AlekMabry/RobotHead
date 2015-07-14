@@ -42,6 +42,9 @@ function scheduleNextUpdate() {
         
         //create variable line that holds the values from the current incoming string
         rl.on('line', function(line){
+        
+        //code used to convert the  "***** *****" to "00000 00000" was removed because I changed the output of the tracker.cpp file.
+        
             
         //split the incoming string into it's x and y values.
         stdinx = line.substring(0,5);
