@@ -1,31 +1,28 @@
 var b = require('bonescript');
 var SERVO = 'P9_14';
+
+//Servo info
 var duty_min = 0.03;
 var position = 0;
 var increment = 0.01;
 var xposition = 0.55;
 var yposition = 0.6;
+
 var xmin = 0.3;
 var ymin = 0.5;
 var xmax = 0.9;
 var ymax = 0.8;
+
 var stdin = [0, 0];
 //Variables end
 
-rl.on('line', onLine);
-var readline = require('readline');
-var rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false
-});
+
 
 b.pinMode(SERVO, b.ANALOG_OUTPUT);
 updateDuty();
 
-function onLine('line') {
+rl.on('line', function(line){
 
-    console.log(line);
     stdin = line.split(" ");
     if (stdin[0] > 20) {
         xposition = (xposition - increment);
