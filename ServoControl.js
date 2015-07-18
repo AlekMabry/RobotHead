@@ -1,9 +1,7 @@
 var b = require('bonescript');
-var SERVO = 'P9_14';
+var xSERVO = 'P9_14';
 
 //Servo info
-var duty_min = 0.03;
-var position = 0;
 var increment = 0.01;
 var xposition = 0.55;
 var yposition = 0.6;
@@ -23,8 +21,8 @@ updateDuty();
 function updateDuty() {
     // compute and adjust duty_cycle based on
     // desired position in range 0..1
-    var duty_cycle = (position*0.115) + duty_min;
-    b.analogWrite(SERVO, duty_cycle, 60);
+    var duty_cycle = (xposition*0.115) + xmin;
+    b.analogWrite(xSERVO, duty_cycle, 60);
 }
 
 rl.on('line', function(line){
