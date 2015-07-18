@@ -16,10 +16,16 @@ var ymax = 0.8;
 var stdin = [0, 0];
 //Variables end
 
-
-
 b.pinMode(SERVO, b.ANALOG_OUTPUT);
 updateDuty();
+
+
+function updateDuty() {
+    // compute and adjust duty_cycle based on
+    // desired position in range 0..1
+    var duty_cycle = (position*0.115) + duty_min;
+    b.analogWrite(SERVO, duty_cycle, 60);
+}
 
 rl.on('line', function(line){
 
@@ -41,13 +47,6 @@ rl.on('line', function(line){
     if (yposition < ymin) yposition = ymin;
     if (yposition > ymax) yposition = ymax;
     updateDuty();
-}
-
-function updateDuty() {
-    // compute and adjust duty_cycle based on
-    // desired position in range 0..1
-    var duty_cycle = (position*0.115) + duty_min;
-    b.analogWrite(SERVO, duty_cycle, 60);
 }
 
 
