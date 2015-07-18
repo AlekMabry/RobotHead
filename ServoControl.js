@@ -24,7 +24,7 @@ b.pinMode(SERVO, b.ANALOG_OUTPUT);
 updateDuty();
 
 function onLine('line') {
-    updateDuty();
+
     console.log(line);
     stdin = line.split(" ");
     if (stdin[0] > 20) {
@@ -51,8 +51,6 @@ function updateDuty() {
     // desired position in range 0..1
     var duty_cycle = (position*0.115) + duty_min;
     b.analogWrite(SERVO, duty_cycle, 60);
-    console.log("Duty Cycle: " + 
-        parseFloat(duty_cycle*100).toFixed(1) + " %");   
 }
 
 
