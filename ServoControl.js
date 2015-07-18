@@ -14,8 +14,17 @@ var ymax = 0.8;
 var stdin = [0, 0];
 //Variables end
 
-b.pinMode(SERVO, b.ANALOG_OUTPUT);
+b.pinMode(xSERVO, b.ANALOG_OUTPUT);
 updateDuty();
+
+var readline = require('readline');
+var rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
+
+
 
 
 function updateDuty() {
@@ -45,6 +54,6 @@ rl.on('line', function(line){
     if (yposition < ymin) yposition = ymin;
     if (yposition > ymax) yposition = ymax;
     updateDuty();
-}
+});
 
 
