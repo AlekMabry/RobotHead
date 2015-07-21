@@ -81,13 +81,13 @@ function onLine(line) {
 
 function subtract_calculate(inx){
     var subtracted = (inx - 20);
-    out = (((subtracted*0.3)/100)/3)
+    out = (((subtracted*0.3)/100)/3);
     return out;
 }
 
 function add_calculate(inx){
     var add = ((inx + 20)*-1);
-    out = (((subtracted*0.3)/100)/3)
+    out = (((subtracted*0.3)/100)/3);
     return out;
 }
 
