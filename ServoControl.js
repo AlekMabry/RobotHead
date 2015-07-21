@@ -60,10 +60,10 @@ function onLine(line) {
     console.log(line);
     stdin = line.split(" ");
     if (stdin[0] > 20) {
-        xposition = (xposition - increment);
+        xposition = (xposition - subtract_calculate(stdin[0]) );
     }
     if (stdin[0] < -20) {
-        xposition = (xposition + increment);
+        xposition = (xposition + add_calculate(stdin[0]) );
     }
     if (stdin[1] < -20) {
         yposition = (yposition + increment);
@@ -76,4 +76,18 @@ function onLine(line) {
     if (yposition < ymin) yposition = ymin;
     if (yposition > ymax) yposition = ymax;
     updateDuty();
+}
+
+function subtract_calculate(in){
+    var subtracted = (in - 20);
+    out = (((subtracted*0.3)/100)/3)
+    return out;
+}
+
+function add_calculate(in){
+    var add = ((in + 20)*-1);
+    out = (((subtracted*0.3)/100)/3)
+    return out;
+}
+
 }
