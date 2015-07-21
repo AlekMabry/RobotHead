@@ -36,6 +36,7 @@ function updateDuty() {
 
 rl.on('line', function(line){
 
+    console.log(line);
     stdin = line.split(" ");
     if (stdin[0] > 20) {
         xposition = (xposition - increment);
