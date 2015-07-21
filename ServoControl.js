@@ -87,7 +87,7 @@ function subtract_calculate(inx){
 
 function add_calculate(inx){
     var add = ((inx + 20)*-1);
-    out = (((subtracted*0.3)/100)/3);
+    out = (((add*0.3)/100)/3);
     return out;
 }
 
