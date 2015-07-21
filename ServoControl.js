@@ -13,6 +13,7 @@ var increment = 0.01;
 var xposition = 0.55;
 var yposition = 0.6;
 var duty_min = 0.03;
+var inx = 0;
 
 var xmin = 0.3;
 var ymin = 0.5;
@@ -78,13 +79,13 @@ function onLine(line) {
     updateDuty();
 }
 
-function subtract_calculate(in){
+function subtract_calculate(inx){
     var subtracted = (in - 20);
     out = (((subtracted*0.3)/100)/3)
     return out;
 }
 
-function add_calculate(in){
+function add_calculate(inx){
     var add = ((in + 20)*-1);
     out = (((subtracted*0.3)/100)/3)
     return out;
