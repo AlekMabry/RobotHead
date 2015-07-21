@@ -1,4 +1,4 @@
-var b = require('bonescript');
+//var b = require('bonescript');
 var xSERVO = 'P9_14';
 var ySERVO = 'P9_22';
 
@@ -16,15 +16,14 @@ var ymax = 0.8;
 var stdin = [0, 0];
 //Variables end
 
-b.pinMode(xSERVO, b.ANALOG_OUTPUT);
-b.pinMode(ySERVO, b.ANALOG_OUTPUT);
+//b.pinMode(xSERVO, b.ANALOG_OUTPUT);
+//b.pinMode(ySERVO, b.ANALOG_OUTPUT);
 updateDuty();
 
 var readline = require('readline');
 var rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout,
-    terminal: false
+    output: process.stdout
 });
 rl.on('line', onLine);
 
@@ -32,9 +31,9 @@ function updateDuty() {
     // compute and adjust duty_cycle based on
     // desired position in range 0..1
     var duty_cycle = (xposition * 0.115) + duty_min;
-    b.analogWrite(xSERVO, duty_cycle, 60);
+    //b.analogWrite(xSERVO, duty_cycle, 60);
     var Yduty_cycle = (yposition * 0.115) + duty_min;
-    b.analogWrite(ySERVO, Yduty_cycle, 60);
+    //b.analogWrite(ySERVO, Yduty_cycle, 60);
 }
 
 function onLine(line) {
