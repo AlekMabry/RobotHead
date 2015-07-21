@@ -20,18 +20,30 @@ var xmax = 0.9;
 var ymax = 0.8;
 
 var stdin = [0, 0];
+var lingeringLine = "";
 //Variables end
 
 b.pinMode(xSERVO, b.ANALOG_OUTPUT);
 b.pinMode(ySERVO, b.ANALOG_OUTPUT);
 updateDuty();
 
-var readline = require('readline');
-var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-rl.on('line', onLine);
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', onData);
+process.stdin.on('end', onEnd);
+
+function onData(chunk) {
+    lines = chunk.split("\n");
+
+    lines[0] = lingeringLine + lines[0];
+    lingeringLine = lines.pop();
+
+    lines.forEach(onLine);
+}
+
+function onEnd() {
+    onLine(lingeringLine);
+}
 
 function updateDuty() {
     // compute and adjust duty_cycle based on
