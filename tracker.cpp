@@ -56,6 +56,7 @@ void trackObject(IplImage* imgThresh){
         lastY = posY;
 
         printf("%+05d %+05d\n", posX-halfWidth, posY-halfHeight);
+        fflush(stdout);
     }else{
         printf("00000 00000\n");
     }
