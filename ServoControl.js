@@ -61,10 +61,16 @@ function onLine(line) {
     console.log(line);
     stdin = line.split(" ");
     if (stdin[0] > 20) {
-        xposition = (xposition - subtract_calculate(stdin[0]) );
+        if (stdin[0] > 60)  { xposition = (xposition - (2*increment));}
+        else {
+        xposition = (xposition - increment);
+        }
     }
     if (stdin[0] < -20) {
-        xposition = (xposition + add_calculate(stdin[0]) );
+        if (stdin[0] < -60){ xposition = (xposition + (2*increment)); }
+        else {
+        xposition = (xposition + increment);
+        }
     }
     if (stdin[1] < -20) {
         yposition = (yposition + increment);
