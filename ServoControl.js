@@ -19,9 +19,9 @@ updateDuty();
 
 var readline = require('readline');
 var rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
 });
 
 
@@ -30,11 +30,11 @@ var rl = readline.createInterface({
 function updateDuty() {
     // compute and adjust duty_cycle based on
     // desired position in range 0..1
-    var duty_cycle = (xposition*0.115) + xmin;
+    var duty_cycle = (xposition * 0.115) + xmin;
     b.analogWrite(xSERVO, duty_cycle, 60);
 }
 
-rl.on('line', function(line){
+rl.on('line', function(line) {
 
     console.log(line);
     stdin = line.split(" ");
@@ -56,5 +56,3 @@ rl.on('line', function(line){
     if (yposition > ymax) yposition = ymax;
     updateDuty();
 });
-
-
