@@ -59,6 +59,7 @@ void trackObject(IplImage* imgThresh){
         fflush(stdout);
     }else{
         printf("00000 00000\n");
+        fflush(stdout);
     }
 
     free(moments); 
