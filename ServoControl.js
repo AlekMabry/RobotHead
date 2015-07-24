@@ -53,6 +53,14 @@ function onEnd() {
 function updateDuty() {
     // compute and adjust duty_cycle based on
     // desired position in range 0..1
+    
+    if (stdin[0] != 0 && stdin[1] != 0 ){
+        leftEyePos = leftMax;
+    } 
+    else{
+        leftEyePos = leftMin;
+    }
+    
     var duty_cycle = (xposition * 0.115) + duty_min;
     b.analogWrite(xSERVO, duty_cycle, 60);
     console.log("duty_cycle: " + duty_cycle);
@@ -69,11 +77,8 @@ function updateDuty() {
 function onLine(line) {
     console.log(line);
     stdin = line.split(" ");
-    if (stdin[0] != 0 && stdin[1] != 0 ){
-        leftEyePos = leftMax;
-    } else  {
-        leftEyePos = leftMin;
-    }
+    
+    
         
     if (stdin[0] > 20) {
         if (stdin[0] > 60)  { xposition = (xposition - (2*increment));}
