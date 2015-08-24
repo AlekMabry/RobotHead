@@ -6,4 +6,4 @@
  
  
  To build ./tracker
- g++ `pkg-config --static --libs opencv` -O3 -o tracker tracker.cpp
+` g++ ```pkg-config --static --libs opencv``` -O3 -o tracker tracker.cpp`
