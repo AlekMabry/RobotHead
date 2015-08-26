@@ -1,43 +1,67 @@
+#imports and stuff
 from subprocess import call
 import datetime
+
+#by changing a to a value other than one ends the loop and closes the program
 a = 1
+
+#define the default voice. This will be changed by the program later on
 voice = "rms"
 
+#define all the ways to ask one type of question.
+
+qHello = ["hello", "hello!", "hi", "hi!"]
+qTime = ["what is the time?", "what is the time", "current time"]
+qName = ["what is your name?", "what is your name", "who are you?", "what are you?"]
+cQuit = ["quit","exit","end"]
+cVoice = ["change voice", "voice change"]
+qAbout = ["where can i find your code?", "where can i find out more about you?"]
+cYes = ["yes", "y"]
+cNo = ["no", "n"]
+
+#Create a function to speak with flite.
 def speak(user_input):
     call(["flite", "-voice", voice, "-t", user_input])
 
+#main loop
 while(a==1):
 
+    #Getting input
     command = raw_input()
 
-    if(command == "Hello!" or command == "hello!" or command == "Hello" or command == "hello" or command == "hi"):
+    #Comparing the input to possible questions.
+
+    if(command.lower() in qHello):
         speak("Hello! Ask a question or say a command to begin!")
-    if(command == "Where can I find your code?" or command == "Where can I find out more about you?"):
+
+    if(command.lower() in qAbout):
         speak("Go to einsteinium studios dot com")
-    
-    if(command == "What is the time?"):
+
+    if(command.lower() in qTime):
         now = datetime.datetime.now()
         speak("Include date?")
         command = raw_input()
-        if(command == "No" or command == "no"):
+        if(command.lower() in cNo):
             speak(now.strftime("%H:%M"))
-        if(command == "Yes" or command == "yes"):
+        if(command.lower() in cYes):
             speak(now.strftime("%Y-%m-%d %H:%M"))
-    
-    if(command == "What is your name?"):
+
+    if(command.lower() in qName):
         speak("I am the Smart Alek Robot Head")
-    
-    if(command == "Quit" or command == "Exit"):
+
+    if(command.lower() in cQuit):
         speak("Are you sure you want to quit?")
         command = raw_input()
-        if(command == "yes" or command == "Yes"):
+        if(command.lower() in cYes):
             speak("Quitting Program")
             a = 0
-    if(command == "Change Voice" or command == "Change Voice" or command == "Change voice"):
+        else:
+            speak("please ask another question!")
+
+    if(command.lower() in cVoice):
         speak("Enter voice name to change too.")
         print("options include: ")
         command = raw_input()
         if(command != ""):
             voice = command
             speak("Changed to "+command+" Voice")
-        
