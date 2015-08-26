@@ -1,8 +1,10 @@
 from subprocess import call
 import datetime
 a = 1
+voice = "rms"
+
 def speak(user_input):
-    call(["flite", "-t", user_input])
+    call(["flite", "-voice", voice, "-t", user_input])
 
 while(a==1):
 
@@ -28,6 +30,14 @@ while(a==1):
     if(command == "Quit" or command == "Exit"):
         speak("Are you sure you want to quit?")
         command = raw_input()
-        if(command == yes or command == Yes):
+        if(command == "yes" or command == "Yes"):
             speak("Quitting Program")
             a = 0
+    if(command == "Change Voice" or command == "Change Voice" or command == "Change voice"):
+        speak("Enter voice name to change too.")
+        print("options include: ")
+        command = raw_input()
+        if(command != ""):
+            voice = command
+            speak("Changed to "+command+" Voice")
+        
