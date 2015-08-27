@@ -17,7 +17,7 @@ class bcolors:
 
 #setup accounts
 current_people = []
-current_person = "default_user"
+current_person = ""
 
 #by changing a to a value other than one ends the loop and closes the program
 a = 1
@@ -38,6 +38,7 @@ cYes = ["yes", "y"]
 cNo = ["no", "n"]
 qStatus = ["current status", "current status?", "how are you doing?", "how are you doing", "status"]
 qInfo = ["login","new session"]
+qWhat = ["what is it?","what is it?","what","what?"]
 qPossible = [qHello, qTime, qName, cQuit, cVoice, qAbout, cYes, cNo, qStatus, qInfo]
 
 #Create a function to speak with flite.
@@ -47,7 +48,17 @@ def speak(user_input):
 def speak2(user_input):
     print(bcolors.OKGREEN+bcolors.BOLD+"Smart Alek Robot Head: "+bcolors.ENDC+bcolors.FAIL+bcolors.BOLD+user_input+bcolors.ENDC)
     call(["flite", "-voice", voice, "-t", user_input])
+
+if("people/" not in os.listdir("/")):
+    call(["mkdir", "people/"])
+
+
+
+
+
 speak("Hello! Ask a question or say a command to begin!")
+
+
 
 #main loop
 while(a==1):
@@ -64,7 +75,21 @@ while(a==1):
         if(command in current_people):
             current_person = command
             speak("Welcome Back! "+current_person)
-            while (("color.txt" not in os.listdir("people/"+current_person)) or ("voice.txt" not in os.listdir("people/"+current_person))):
+            if("voice.txt" in os.listdir("people/"+current_person+"/")):
+                speak("Would you like me to import your voice preference?")
+                command = raw_input()
+                if(command.lower() in qWhat):
+                    fo = open("people/"+current_person+"/voice.txt", "r")
+                    voice = fo.read()
+                    fo.close()
+                    speak("Your prefered voice is: "+voice)
+                    voice = "rms"
+                if(command.lower() in cYes):
+                    fo = open("people/"+current_person+"/voice.txt", "r")
+                    voice = fo.read()
+                    fo.close()
+                    speak("Voice set to: "+voice+"!")
+            while ("color.txt" not in os.listdir("people/"+current_person)) or ("voice.txt" not in os.listdir("people/"+current_person)):
                 if("color.txt" not in os.listdir("people/"+current_person)):
                     speak("It appears that your favorite color is not in my database!")
                     speak("What is your favorite color?")
@@ -120,13 +145,14 @@ while(a==1):
             # Close opend file
             fo.close()
 
-
-
     if(command.lower() in qStatus):
         speak("I am doing fine")
 
     if(command.lower() in qHello):
-        speak("Hello! What is your name?")
+        if(current_person is not ""):
+            speak("Hello! "+current_person)
+        else:
+            speak("Hello! Currently I do not know who you are. Run 'login' or 'new session' to create an account.")
 
     if(command.lower() in qAbout):
         speak("Go to einsteinium studios dot com")
@@ -154,9 +180,21 @@ while(a==1):
 
     if(command.lower() in cVoice):
         speak("Enter voice name to change to.")
-        options = call(["flite", "-lv"])
-        print(options)
+        options = "kal awb_time kal16 awb rms slt"
+        print(bcolors.OKGREEN+bcolors.BOLD+"Smart Alek Robot Head: "+bcolors.ENDC+bcolors.OKBLUE+bcolors.BOLD+"Available Options: "+options+bcolors.ENDC)
         command = raw_input()
-        if(command != ""):
+        if(command.lower() in options):
             voice = command
             speak("Changed to "+command+" Voice")
+            if(current_person is not ""):
+                speak(current_person+", would you like me to set "+voice+" to your prefered voice settings?")
+                command = raw_input()
+                if(command.lower() in cYes):
+                    fo = open("people/"+current_person+"/voice.txt", "wb")
+                    fo.write(voice)
+                    # Close opend file
+                    fo.close()
+                    speak(voice + " is set to your prefered voice.")
+                if(command.lower() in cNo):
+                    speak("Ok")
+
