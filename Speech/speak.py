@@ -2,7 +2,7 @@
 from subprocess import call
 import datetime
 import os
-from os import listdir
+
 
 #Setup color text
 class bcolors:
@@ -32,13 +32,14 @@ qHello = ["hello", "hello!", "hi", "hi!"]
 qTime = ["what is the time?", "what is the time", "current time"]
 qName = ["what is your name?", "what is your name", "who are you?", "what are you?"]
 cQuit = ["quit","exit","end"]
-cVoice = ["change voice", "voice change"]
-qAbout = ["where can i find your code?", "where can i find out more about you?"]
+cVoice = ["change voice", "voice change","vc", "cv"]
+qAbout = ["where can i find your code?", "where can i find out more about you?","where is your code","where is your code?","is there tutorials"]
+qMade = ["who made you?", "who made you", "who is your creator"]
 cYes = ["yes", "y"]
 cNo = ["no", "n"]
-qStatus = ["current status", "current status?", "how are you doing?", "how are you doing", "status"]
+qStatus = ["current status", "current status?", "how are you doing?", "how are you doing", "status", "how do you do?", "how do you do"]
 qInfo = ["login","new session"]
-qWhat = ["what is it?","what is it?","what","what?"]
+qWhat = ["what is it","what is it","what","what","huh"]
 qPossible = [qHello, qTime, qName, cQuit, cVoice, qAbout, cYes, cNo, qStatus, qInfo]
 
 #Create a function to speak with flite.
@@ -169,6 +170,9 @@ while(a==1):
     if(command.lower() in qName):
         speak("I am the Smart Alek Robot Head")
 
+    if(command.lower() in qMade):
+        speak("Alek Mabry created me. You can find out more at Einsteinium Studios dot com")
+
     if(command.lower() in cQuit):
         speak2("Are you sure you want to quit?")
         command = raw_input()
@@ -183,7 +187,20 @@ while(a==1):
         options = "kal awb_time kal16 awb rms slt"
         print(bcolors.OKGREEN+bcolors.BOLD+"Smart Alek Robot Head: "+bcolors.ENDC+bcolors.OKBLUE+bcolors.BOLD+"Available Options: "+options+bcolors.ENDC)
         command = raw_input()
-        if(command.lower() in options):
+        while(command.lower() not in options):
+            if("try " in command.lower()):
+                currentString = command.lower()
+                editString = currentString.replace("try ","")
+                oldVoice = voice
+                voice = editString
+                speak("This is the "+voice+" voice.")
+                voice = oldVoice
+                command = raw_input()
+            if("try " not in command.lower()):
+                speak2("'"+command.lower()+"' is not a valid command or voice.")
+                command = raw_input()
+
+        else:
             voice = command
             speak("Changed to "+command+" Voice")
             if(current_person is not ""):
