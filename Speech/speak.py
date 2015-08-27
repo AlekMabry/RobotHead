@@ -64,17 +64,47 @@ while(a==1):
         if(command in current_people):
             current_person = command
             speak("Welcome Back! "+current_person)
-            if("color.txt" not in os.listdir("people/"+current_person)):
-                speak("It appears that your favorite color is not in my database!")
-                speak("What is your favorite color?")
-                command = raw_input()
-                speak("Your favorite color is "+command.lower()+ "? That is mine too!")
-                # Open a file
-                fo = open("people/"+current_person+"/color.txt", "wb")
-                fo.write(command.lower());
+            while (("color.txt" not in os.listdir("people/"+current_person)) or ("voice.txt" not in os.listdir("people/"+current_person))):
+                if("color.txt" not in os.listdir("people/"+current_person)):
+                    speak("It appears that your favorite color is not in my database!")
+                    speak("What is your favorite color?")
+                    command = raw_input()
+                    speak("Your favorite color is "+command.lower()+ "? That is mine too!")
+                    # Open a file
+                    fo = open("people/"+current_person+"/color.txt", "wb")
+                    fo.write(command.lower());
 
-                # Close opend file
-                fo.close()
+                    # Close opend file
+                    fo.close()
+                if("voice.txt" not in os.listdir("people/"+current_person)):
+                    speak("It appears that your prefered voice is not in my database!")
+                    speak("What is your prefered voice?")
+                    options = "kal awb_time kal16 awb rms slt"
+                    print(bcolors.OKGREEN+bcolors.BOLD+"Smart Alek Robot Head: "+bcolors.ENDC+bcolors.OKBLUE+bcolors.BOLD+"Available Options: "+options+bcolors.ENDC)
+                    command = raw_input()
+                    if(command.lower() in options):
+                        speak("prefered voice set to: "+command.lower())
+                        # Open a file
+                        fo = open("people/"+current_person+"/voice.txt", "wb")
+                        fo.write(command.lower());
+
+                        # Close opend file
+                        fo.close()
+                    else:
+                        speak("That is not a valid option")
+                        options = "kal awb_time kal16 awb rms slt"
+                        print(bcolors.OKGREEN+bcolors.BOLD+"Smart Alek Robot Head: "+bcolors.ENDC+bcolors.OKBLUE+bcolors.BOLD+"Available Options: "+options+bcolors.ENDC)
+                        command = raw_input()
+                        if(command.lower() in options):
+                            speak("prefered voice set to: "+command.lower())
+                            # Open a file
+                            fo = open("people/"+current_person+"/voice.txt", "wb")
+                            fo.write(command.lower());
+                             # Close opend file
+                            fo.close()
+                        else:
+                            speak2("NO! NONE OF THOSE ANSWERS ARE AN OPTION!")
+
         else:
             call(["mkdir","people/"+command])
             current_person = command
