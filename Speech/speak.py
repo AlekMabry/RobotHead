@@ -37,7 +37,7 @@ qAbout = ["where can i find your code?", "where can i find out more about you?"]
 cYes = ["yes", "y"]
 cNo = ["no", "n"]
 qStatus = ["current status", "current status?", "how are you doing?", "how are you doing", "status"]
-qInfo = ["i will tell you about myself","new session"]
+qInfo = ["login","new session"]
 qPossible = [qHello, qTime, qName, cQuit, cVoice, qAbout, cYes, cNo, qStatus, qInfo]
 
 #Create a function to speak with flite.
@@ -70,7 +70,7 @@ while(a==1):
                 command = raw_input()
                 speak("Your favorite color is "+command.lower()+ "? That is mine too!")
                 # Open a file
-                fo = open("foo.txt", "wb")
+                fo = open("people/"+current_person+"/color.txt", "wb")
                 fo.write(command.lower());
 
                 # Close opend file
@@ -84,7 +84,7 @@ while(a==1):
             command = raw_input()
             speak("Your favorite color is "+command.lower()+ "? That is mine too!")
             # Open a file
-            fo = open("foo.txt", "wb")
+            fo = open("people/"+current_person+"/color.txt", "wb")
             fo.write(command.lower());
 
             # Close opend file
