@@ -1,6 +1,8 @@
 #imports and stuff
 from subprocess import call
 import datetime
+import os
+from os import listdir
 
 #Setup color text
 class bcolors:
@@ -12,6 +14,10 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+#setup accounts
+current_people = []
+current_person = "default_user"
 
 #by changing a to a value other than one ends the loop and closes the program
 a = 1
@@ -31,6 +37,8 @@ qAbout = ["where can i find your code?", "where can i find out more about you?"]
 cYes = ["yes", "y"]
 cNo = ["no", "n"]
 qStatus = ["current status", "current status?", "how are you doing?", "how are you doing", "status"]
+qInfo = ["i will tell you about myself","new session"]
+qPossible = [qHello, qTime, qName, cQuit, cVoice, qAbout, cYes, cNo, qStatus, qInfo]
 
 #Create a function to speak with flite.
 def speak(user_input):
@@ -48,6 +56,42 @@ while(a==1):
     command = raw_input()
 
     #Comparing the input to possible questions.
+
+    if(command.lower() in qInfo):
+        speak("What is your name?")
+        command = raw_input()
+        current_people = os.listdir("people/")
+        if(command in current_people):
+            current_person = command
+            speak("Welcome Back! "+current_person)
+            if("color.txt" not in os.listdir("people/"+current_person)):
+                speak("It appears that your favorite color is not in my database!")
+                speak("What is your favorite color?")
+                command = raw_input()
+                speak("Your favorite color is "+command.lower()+ "? That is mine too!")
+                # Open a file
+                fo = open("foo.txt", "wb")
+                fo.write(command.lower());
+
+                # Close opend file
+                fo.close()
+        else:
+            call(["mkdir","people/"+command])
+            current_person = command
+            speak("Hello! " + current_person)
+            speak("Please answer a few questions about yourself!")
+            speak("What is your favorite color?")
+            command = raw_input()
+            speak("Your favorite color is "+command.lower()+ "? That is mine too!")
+            # Open a file
+            fo = open("foo.txt", "wb")
+            fo.write(command.lower());
+
+            # Close opend file
+            fo.close()
+
+
+
     if(command.lower() in qStatus):
         speak("I am doing fine")
 
@@ -86,5 +130,3 @@ while(a==1):
         if(command != ""):
             voice = command
             speak("Changed to "+command+" Voice")
-
-
