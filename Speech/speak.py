@@ -4,6 +4,7 @@ import datetime
 import os
 
 
+
 #Setup color text
 class bcolors:
     HEADER = '\033[95m'
@@ -23,12 +24,12 @@ current_person = ""
 a = 1
 
 #define the default voice. This will be changed by the program later on
-voice = "rms"
+voice = "kal"
 options = "Currently Unavailable"
 
 #define all the ways to ask one type of question.
 
-qHello = ["hello", "hello!", "hi", "hi!"]
+qHello = ["hello", "hello!", "hi", "hi!", "yo","wazzup"]
 qTime = ["what is the time?", "what is the time", "current time"]
 qName = ["what is your name?", "what is your name", "who are you?", "what are you?"]
 cQuit = ["quit","exit","end"]
@@ -40,6 +41,8 @@ cNo = ["no", "n"]
 qStatus = ["current status", "current status?", "how are you doing?", "how are you doing", "status", "how do you do?", "how do you do"]
 qInfo = ["login","new session"]
 qWhat = ["what is it","what is it","what","what","huh"]
+cNotify = ["notifications","notify","what is going on today?"]
+inputDate = [0,0]
 qPossible = [qHello, qTime, qName, cQuit, cVoice, qAbout, cYes, cNo, qStatus, qInfo]
 
 #Create a function to speak with flite.
@@ -53,8 +56,22 @@ def speak2(user_input):
 if("people/" not in os.listdir("/")):
     call(["mkdir", "people/"])
 
-
-
+def notifcations_read(nmonth,nday):
+    if(current_person != ""):
+        monthExists = os.listdir("people/"+current_person)
+        if("month"+nmonth in monthExists):
+            dayExists = os.listdir("people/"+current_person+"/month"+nmonth)
+            if("day"+nday in dayExists):
+                fo = open("people/"+current_person+"/month"+nmonth+"/day"+nday)
+                notify = fo.read()
+                fo.close()
+                speak("Todays notifications: "+notify)
+            else:
+                speak("You have no notifications for today")
+        else:
+            speak("You have no notifications this month")
+    else:
+        speak("You are not logged in. Login with 'login' in order to see your notifications.")
 
 
 speak("Hello! Ask a question or say a command to begin!")
@@ -146,6 +163,19 @@ while(a==1):
             # Close opend file
             fo.close()
 
+    if(command.lower() in cNotify):
+        speak("What day? ('today' or '08-01' format)")
+        command = raw_input()
+        now = datetime.datetime.now()
+        if(command.lower() == "today"):
+            notifcations_read(now.strftime("%m"),now.strftime("%d"))
+        if(command.lower() in cQuit):
+            speak("Ask another question or say a command.")
+        if(command.lower() not in cQuit and command.lower() != "today"):
+            inputDate = command.lower().split("-")
+            notifcations_read(inputDate[0],inputDate[1])
+
+
     if(command.lower() in qStatus):
         speak("I am doing fine")
 
@@ -165,7 +195,7 @@ while(a==1):
         if(command.lower() in cNo):
             speak(now.strftime("%H:%M"))
         if(command.lower() in cYes):
-            speak(now.strftime("%Y-%m-%d %H:%M"))
+            speak(now.strftime("%Y - %m - %d %H:%M"))
 
     if(command.lower() in qName):
         speak("I am the Smart Alek Robot Head")
