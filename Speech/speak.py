@@ -3,8 +3,6 @@ from subprocess import call
 import datetime
 import os
 
-
-
 #Setup color text
 class bcolors:
     HEADER = '\033[95m'
@@ -53,7 +51,25 @@ def speak2(user_input):
     print(bcolors.OKGREEN+bcolors.BOLD+"Smart Alek Robot Head: "+bcolors.ENDC+bcolors.FAIL+bcolors.BOLD+user_input+bcolors.ENDC)
     call(["flite", "-voice", voice, "-t", user_input])
 
-if("people/" not in os.listdir("/")):
+#Check if there is a logged on user
+def ifCUser():
+    if(current_person != ""):
+        return True
+
+#Write to file function
+def write_file(write_data):
+    fo = open("people/"+current_person+"/color.txt", "wb")
+    fo.write(command.lower());
+    fo.close()
+
+#Read the number of lines in a notifications file
+def check_notify(month,day):
+    with open("people/"+current_person+"/month"+month+"/day"+day) as f:
+        for i, l in enumerate(f):
+            pass
+            return i + 1
+
+if("people" not in os.listdir("/")):
     call(["mkdir", "people/"])
 
 def notifcations_read(nmonth,nday):
@@ -186,7 +202,7 @@ while(a==1):
             speak("Hello! Currently I do not know who you are. Run 'login' or 'new session' to create an account.")
 
     if(command.lower() in qAbout):
-        speak("Go to einsteinium studios dot com")
+        speak("Go to Einsteinium Studios dot com")
 
     if(command.lower() in qTime):
         now = datetime.datetime.now()
@@ -227,7 +243,7 @@ while(a==1):
                 voice = oldVoice
                 command = raw_input()
             if("try " not in command.lower()):
-                speak2("'"+command.lower()+"' is not a valid command or voice.")
+                speak2("'"+command.lower()+"' is plnot a valid command or voice.")
                 command = raw_input()
 
         else:
