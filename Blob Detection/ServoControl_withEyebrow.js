@@ -8,14 +8,12 @@ try {
 var xSERVO = 'P9_14';
 var ySERVO = 'P9_22';
 var leftEyebrow = 'P8_45'
-var rightEyebrow = 'P8_42'
 
 //Servo info
 var increment = 0.01;
 var xposition = 0.55;
 var yposition = 0.6;
 var leftEyePos = 0;
-var rightEyePos = 0;
 var duty_min = 0.03;
 var inx = 0;
 
@@ -25,8 +23,6 @@ var xmax = 0.9;
 var ymax = 0.8;
 var leftMax = 0.43;
 var leftMin = 0;
-var rightMax = 0.43;
-var rightMin = 0.43;
 
 var stdin = [0, 0];
 var lingeringLine = "";
@@ -60,11 +56,9 @@ function updateDuty() {
     
     if (stdin[0] != 0 && stdin[1] != 0 ){
         leftEyePos = leftMax;
-        rightEyePos = rightMin;
     } 
     else{
         leftEyePos = leftMin;
-        rightEyePos = rightMax;
     }
     
     var duty_cycle = (xposition * 0.115) + duty_min;
@@ -74,10 +68,6 @@ function updateDuty() {
     var leftDuty_cycle = (leftEyePos * 0.115) + duty_min;
     b.analogWrite(leftEyebrow, leftDuty_cycle, 60);
     console.log("duty_cycle: " + leftDuty_cycle);
-    
-    var leftDuty_cycle = (rightEyePos * 0.115) + duty_min;
-    b.analogWrite(rightEyebrow, rightDuty_cycle, 60);
-    console.log("duty_cycle: " + rightDuty_cycle);
     
     var Yduty_cycle = (yposition * 0.115) + duty_min;
     b.analogWrite(ySERVO, Yduty_cycle, 60);
@@ -126,4 +116,3 @@ function add_calculate(inx){
     out = (((add*0.1)/100)/3);
     return out;
 }
-
