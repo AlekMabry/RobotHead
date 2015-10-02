@@ -14,7 +14,6 @@ video_capture = cv2.VideoCapture(0)
 
 video_capture.set(3, 320)
 video_capture.set(4, 280)
-video_capture.set(6, 2)
 
 while True:
     # Capture frame-by-frame
