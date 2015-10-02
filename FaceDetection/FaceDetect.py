@@ -9,9 +9,6 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 
 video_capture = cv2.VideoCapture(0)
 
-#cv2.SetCaptureProperty(video_capture, cv2.CV_CAP_PROP_FRAME_WIDTH, 320)
-#cv2.SetCaptureProperty(video_capture, cv2.CV_CAP_PROP_FRAME_HEIGHT, 280)
-
 video_capture.set(3, 320)
 video_capture.set(4, 280)
 
