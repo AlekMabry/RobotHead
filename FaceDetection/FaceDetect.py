@@ -1,10 +1,8 @@
-import cv2
-import sys
-from subprocess import call
-import os
 import numpy as np
+import sys
+import cv2
 
-cascPath = sys.argv[1]
+cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
 video_capture = cv2.VideoCapture(0)
@@ -28,21 +26,29 @@ while True:
 
     # Draw a rectangle around the faces
     for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-	outx = x+(w/2)
-	outy = y+(h/2)
-	if outx.astype('int') > 160:
-                valx = outx.astype('int') - 160
-	if outx.astype('int') < 160:
-		valx = -1*(160 - outx.astype('int'))
-	if outy.astype('int') > 140:
-                valy = outy.astype('int') - 140
-        if outy.astype('int') < 140:
-                valy = -1*(140 - outy.astype('int'))
-	arrayx = np.copy(valx)
-	arrayy = np.copy(valy)
-	sys.stdout.write(arrayx.astype('str')+" "+arrayy.astype('str'))
-	sys.stdout.flush()
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+        #Find the center of the face
+        outxNumPy = x + (w / 2)
+        outyNumPy = y + (h / 2)
+        outx = outxNumPy.astype('int')
+        outy = outyNumPy.astype('int')
+
+        #Find distance from center of screen
+        if outx > 160:
+            valx = outx - 160
+        if outx < 160:
+            valx = -1 * (160 - outx)
+        if outy > 140:
+            valy = outy - 140
+        if outy < 140:
+            valy = -1 * (140 - outy)
+
+        #Convert to string and output to pipe
+        arrayx = np.array_str(valx)
+        arrayy = np.array_str(valy)
+        sys.stdout.write(arrayx + " " + arrayy+' \n')
+
     # Display the resulting frame
     cv2.imshow('Video', frame)
 
@@ -52,4 +58,3 @@ while True:
 # When everything is done, release the capture
 video_capture.release()
 cv2.destroyAllWindows()
-
