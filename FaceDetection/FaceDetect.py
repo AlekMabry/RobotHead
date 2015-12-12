@@ -7,8 +7,10 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 
 video_capture = cv2.VideoCapture(0)
 
-video_capture.set(3, 320)
-video_capture.set(4, 280)
+#This slows down the incoming video in order to avoid lag.
+video_capture.set(cv2.cv.CV_CAP_PROP_FPS,2)
+video_capture.set(3, 160)
+video_capture.set(4, 120)
 
 while True:
     # Capture frame-by-frame
@@ -26,7 +28,7 @@ while True:
 
     # Draw a rectangle around the faces
     for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 255, 0), 2)
 
         #Find the center of the face
         outxNumPy = x + (w / 2)
