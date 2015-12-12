@@ -2,6 +2,8 @@ import numpy as np
 import sys
 import cv2
 
+debug = 1
+
 cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
@@ -37,26 +39,29 @@ while True:
         outy = outyNumPy.astype('int')
 
         #Find distance from center of screen
-        if outx > 160:
-            valx = outx - 160
-        if outx < 160:
-            valx = -1 * (160 - outx)
-        if outy > 140:
-            valy = outy - 140
-        if outy < 140:
-            valy = -1 * (140 - outy)
+        if outx > 80:
+            valx = outx - 80
+        if outx < 80:
+            valx = -1 * (80 - outx)
+        if outy > 60:
+            valy = outy - 60
+        if outy < 60:
+            valy = -1 * (60 - outy)
 
         #Convert to string and output to pipe
         arrayx = np.array_str(valx)
         arrayy = np.array_str(valy)
         sys.stdout.write(arrayx + " " + arrayy+' \n')
+        sys.stdout.flush()
 
     # Display the resulting frame
-    cv2.imshow('Video', frame)
+    if debug == 1:
+        cv2.imshow('Video', frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 # When everything is done, release the capture
-video_capture.release()
-cv2.destroyAllWindows()
+if debug == 1:
+    video_capture.release()
+    cv2.destroyAllWindows()
