@@ -1,0 +1,45 @@
+cmake_minimum_required(VERSION 3.1)
+PROJECT ( AudioModule )
+
+find_package( PkgConfig REQUIRED )
+
+# Find all of the PocketSphinx libraries
+pkg_check_modules( POCKETSPHINX REQUIRED pocketsphinx )
+find_path(POCKETSPHINX_INCLUDE_DIRS pocketsphinx.h
+    HINTS ${PC_POCKETSPHINX_INCLUDEDIR} ${PC_POCKETSPHINX_INCLUDE_DIRS}
+    PATH_SUFFIXES pocketsphinx)
+
+find_library( POCKETSPHINX_LIBRARIES pocketsphinx
+    HINTS ${PC_POCKETSPHINX_LIBRARY_DIRS} ${PC_POCKETSPHINX_LIBDIR})
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(PocketSphinx DEFAULT_MSG
+    POCKETSPHINX_LIBRARIES POCKETSPHINX_INCLUDE_DIRS)
+
+list(APPEND POCKETSPHINX_INCLUDE_DIRS ${PC_POCKETSPHINX_INCLUDE_DIRS})
+
+mark_as_advanced(POCKETSPHINX_INCLUDE_DIRS POCKETSPHINX_LIBRARIES)
+
+execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} pocketsphinx --variable=modeldir
+                OUTPUT_VARIABLE POCKETSPHINX_MODELDIR
+OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+set(POCKETSPHINX_VERSION ${PC_POCKETSPHINX_VERSION})
+# ///////////////////////////////////////////////////////////////////////////////////// #
+
+set( NAME_SRC
+        AudioManager.cpp
+        )
+
+set( NAME_HEADERS
+        AudioManager.h
+        )
+
+# Link PocketSphinx
+include_directories( ${POCKETSPHINX_INCLUDE_DIRS} )
+link_directories( ${POCKETSPHINX_INCLUDE_DIRS} )
+# target_link_libraries( AudioModule ${POCKETSPHINX_LIBRARIES} )
+# add_compile_options( -DMODELDIR=${POCKETSPHINX_MODELDIR})
+
+# Create the Library
+add_library( AudioModule ${NAME_SRC} ${NAME_HEADERS} )
