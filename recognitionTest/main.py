@@ -61,7 +61,7 @@ print("Data prepared")
 print("Total faces: ", len(faces))
 print("Total labels: ", len(labels))
 
-face_recognizer = cv2.face.createFisherFaceRecognizer()
+face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 face_recognizer.train(faces, np.array(labels))
 
 def draw_rectangle(img, rect):

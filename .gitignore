@@ -1,0 +1,6 @@
+cmake_install.cmake
+Makefile
+*.a
+CMakeCache.txt
+CMakeFiles/
+training-data/

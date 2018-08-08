@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 PROJECT ( AudioModule )
+set( CMAKE_BUILD_TYPE Release )
 
 list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake" )
 
@@ -23,4 +24,4 @@ link_directories( ${POCKETSPHINX_INCLUDE_DIRS} )
 # add_compile_options( -DMODELDIR=${POCKETSPHINX_MODELDIR})
 
 # Create the Library
-add_library( AudioModule ${NAME_SRC} ${NAME_HEADERS} )
+add_library( AudioModule SHARED ${NAME_SRC} ${NAME_HEADERS} )

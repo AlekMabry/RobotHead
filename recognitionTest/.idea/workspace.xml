@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39688e23-56a8-4c99-885e-c9095211af82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AudioModule/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AudioModule/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/FaceDetection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../src/FaceDetection.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/FaceDetection.h" beforeDir="false" afterPath="$PROJECT_DIR$/../src/FaceDetection.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/roboCore" beforeDir="false" afterPath="$PROJECT_DIR$/../src/roboCore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/roboCore.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../src/roboCore.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +23,10 @@
         <counts>
           <entry key="project.closed" value="1" />
           <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -32,28 +41,27 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2403" />
+          <entry key="py" value="2408" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2403" />
+          <entry key="Python" value="2408" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="63" column="55" lean-forward="true" selection-start-line="63" selection-start-column="55" selection-end-line="63" selection-end-column="55" />
+            <state relative-caret-position="408">
+              <caret line="75" column="33" lean-forward="true" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1533278543751" expanded="true" signature="108:109" ph="..." />
-                <marker date="1533278543751" expanded="true" signature="487:492" ph="..." />
-                <marker date="1533278543751" expanded="true" signature="1964:2495" ph="..." />
+                <marker date="1533727978814" expanded="true" signature="108:109" ph="..." />
+                <marker date="1533727978814" expanded="true" signature="487:492" ph="..." />
               </folding>
             </state>
           </provider>
@@ -79,9 +87,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="65" />
+    <option name="x" value="64" />
     <option name="y" value="24" />
-    <option name="width" value="1400" />
+    <option name="width" value="1124" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -90,7 +98,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -102,6 +109,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="RunDashboard">
@@ -158,10 +166,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1400" height="1056" extended-state="4" />
+    <frame x="64" y="24" width="1124" height="1056" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24981844" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31244323" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -186,13 +194,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="63" column="55" lean-forward="true" selection-start-line="63" selection-start-column="55" selection-end-line="63" selection-end-column="55" />
+        <state relative-caret-position="408">
+          <caret line="75" column="33" lean-forward="true" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <marker date="1533278543751" expanded="true" signature="108:109" ph="..." />
-            <marker date="1533278543751" expanded="true" signature="487:492" ph="..." />
-            <marker date="1533278543751" expanded="true" signature="1964:2495" ph="..." />
+            <marker date="1533727978814" expanded="true" signature="108:109" ph="..." />
+            <marker date="1533727978814" expanded="true" signature="487:492" ph="..." />
           </folding>
         </state>
       </provider>
