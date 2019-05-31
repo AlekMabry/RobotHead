@@ -68,7 +68,6 @@ int main(int, char**)
         Servos.servo_pos[SERVO_NECK_PITCH] -= 0.1;
       }
     }
-    int yOffset = yPos - 80;
     
     
     //cout << flush;
