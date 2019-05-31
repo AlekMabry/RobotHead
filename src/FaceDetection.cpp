@@ -23,7 +23,7 @@ FaceDetection::FaceDetection( ) {
   faceDatabase->load( LBPH_LOCATION );
 }
 
-void FaceDetection::findFaces(Mat& frame) {
+void FaceDetection::findFaces(Mat& frame, int& xPos, int& yPos) {
     std::vector<Rect> faces;
     Mat frame_gray;
 
@@ -33,24 +33,32 @@ void FaceDetection::findFaces(Mat& frame) {
     //-- Detect faces
     cascade_frontalface.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30) );
 
-    for( size_t i = 0; i < faces.size(); i++ )
+    if (faces.size() > 0)
     {
-      Point center( faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5 );
-      ellipse( frame, center, Size( faces[i].width*0.5, faces[i].height*0.5), 0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0 );
+      xPos = faces[0].x + faces[0].width*0.5;
+      yPos = faces[0].y + faces[0].height*0.5;
+    }
+     else
+    {
+      xPos = 999;
+      yPos = 999;
+    }
+    // for( size_t i = 0; i < faces.size(); i++ )
+    // {
+      // Point center( faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5 );
+      // ellipse( frame, center, Size( faces[i].width*0.5, faces[i].height*0.5), 0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0 );
 
-      Mat faceROI = frame_gray( faces[i] );
-      std::vector<Rect> smiles;
+      // Mat faceROI = frame_gray( faces[i] );
+      // std::vector<Rect> smiles;
 
       //-- In each face, detect eyes
-      cascade_smiling.detectMultiScale( faceROI, smiles, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
+      // cascade_smiling.detectMultiScale( faceROI, smiles, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
 
-      if ( smiles.size() > 0 ) {
-        printf("Smiling \n");
-      } else {
-        printf("Not Smiling \n");
-      }
-
-      cout << flush;
+      // if ( smiles.size() > 0 ) {
+      //   printf("Smiling \n");
+      // } else {
+      //  printf("Not Smiling \n");
+      // }
 
       //for( size_t j = 0; j < eyes.size(); j++ )
       // {
@@ -58,7 +66,7 @@ void FaceDetection::findFaces(Mat& frame) {
       //   int radius = cvRound( (eyes[j].width + eyes[j].height)*0.25 );
       //   circle( frame, center, radius, Scalar( 255, 0, 0 ), 4, 8, 0 );
       // }
-    }
+    // }
     //return frame;
 }
 

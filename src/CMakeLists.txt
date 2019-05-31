@@ -21,11 +21,13 @@ set( NAME_SRC
         roboCore.cpp
         BlobDetection.cpp
         FaceDetection.cpp
+        servos.cpp
         )
 
 set( NAME_HEADERS
         BlobDetection.h
         FaceDetection.h
+        servos.h
         )
 
 add_executable( roboCore ${NAME_SRC} ${NAME_HEADERS} )

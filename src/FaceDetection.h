@@ -43,6 +43,6 @@ class FaceDetection {
     bool cascadeLoaded_smiling;
 
     FaceDetection();
-    void findFaces(Mat& frame);
+    void findFaces(Mat& frame, int& xPos, int& yPos);
     void detectPeople(Mat& frame);
 };
